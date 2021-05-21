@@ -8,11 +8,10 @@ def circle_corners(src):
     dst_norm = np.empty(dst.shape, dtype=np.float32)
     cv2.normalize(dst, dst_norm, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX)
     w, h = dst_norm.shape
-    color = (255, 0, 0)
     for i in range(w):
-        for j in range (h):
+        for j in range(h):
             if int(dst_norm[i][j]) > 60:
-                cv2.circle(src, (j, i), 2, color)
+                cv2.circle(src, (j, i), 2, 255)
 
 
 def calculate_pixel_color(image, x, y, radius):
@@ -46,6 +45,7 @@ def main():
     res = cv2.equalizeHist(res)
     res = cv2.Canny(res, 100, 200)
     circle_corners(res)
+    res = 255 - res
     distance = cv2.distanceTransform(res, cv2.DIST_L2, 3)
     filtered_img = median_filter(image, distance)
 

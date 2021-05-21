@@ -58,15 +58,10 @@ def MaxPooling2x2(src):
 
 def main():
     image = cv2.imread("white_noise.jpg")
-    image = cv2.resize(image, (75, 75))
     res = conv3d(image, np.random.rand(3, 3, 3))
     res = ReLU(res)
     res = MaxPooling2x2(res)
-
-    cv2.imshow("Image", image)
     print(res.shape)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
